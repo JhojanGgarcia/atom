@@ -9,7 +9,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import "@/styles/mask.css";
 
 // Constantes para la API
-const API_KEY = "AIzaSyB_lem2ycMZDFu6XadJ9AJlkpqpXF380Ik";
+const API_KEY = process.env.NEXT_PUBLIC_API_IA;
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
@@ -86,8 +86,6 @@ const OvenAI = () => {
         .replace(/[*#]/g, "") // Elimina '*' y '#'
         .replace(/\s{2,}/g, " ") // Reemplaza múltiples espacios con un solo espacio
         .trim(); // Elimina espacios en blanco al inicio y al final
-
-      console.log(cleanedText); // Añade este log para depurar
       setResultText(cleanedText);
     } catch (error) {
       console.error("Error usando el horno:", error);
