@@ -87,15 +87,9 @@ export default function Features() {
                 quality={100}
                 fill
               />
-              <div className="flex z-10">
-                <h1 className="md:text-3xl text-xl font-bold bg-gradient-to-l from-white to-[#1d1d1d] inline-block text-transparent bg-clip-text">
-                  Control de&nbsp;
-                </h1>
-                <h1 className="md:text-3xl text-xl text-white font-bold">
-                  presicion&nbsp;
-                </h1>
-                <h1 className="md:text-3xl text-xl font-bold bg-gradient-to-r from-white to-[#1d1d1d] inline-block text-transparent bg-clip-text">
-                  Electromagnético.
+              <div className="flex text-center z-10">
+                <h1 className="md:text-3xl text-2xl font-bold bg-gradient-to-l from-white to-[#1d1d1d] inline-block text-transparent bg-clip-text">
+                  Control de presisión electromagnético.
                 </h1>
               </div>
             </>
@@ -233,7 +227,7 @@ export default function Features() {
                 para el calentamiento de metales
               </h1>
               <p className="font-bold text-lg text-white/50">
-                Generarador de calor y analizador con IA de
+                Generador de calor y analizador con IA de
                 la temperatura eficiente.
               </p>
             </div>
