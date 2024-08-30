@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/_Footer";
 import { Toaster, toast } from "sonner";
 import { userInputs } from "@/lib/userInput";
 import { motion } from "framer-motion";
-import Button from "@/components/ui/Button";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import Button from "@/components/ui/Button";
 import "@/styles/mask.css";
 
 // Constantes para la API
@@ -132,7 +133,7 @@ const OvenAI = () => {
   }, [ref.current?.scrollHeight, ref.current?.clientHeight]);
 
   return (
-    <main className="overflow-x-hidden bg-[#121212]">
+    <main className="overflow-x-hidden flex flex-col gap-12 bg-[#121212]">
       <Header />
       <div className="absolute h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-5"></div>
 
@@ -144,10 +145,10 @@ const OvenAI = () => {
             <div className="absolute w-14 h-14 top-0 left-0 bg-white blur-3xl opacity-80" />
             <div className="absolute w-14 h-14 bottom-0 right-0 bg-white blur-3xl opacity-80" />
             <h2 className="text-2xl text-white mb-4 text-center">
-              Metal Processing Form
+              Horno de inducción.
             </h2>
-            <p className="mb-4 text-white/50 text-center">
-              Provide the details below to initiate the metal processing.
+            <p className="mb-4 max-w-lg text-white/50 text-center">
+              Proporcione los detalles a continuación para iniciar el procesamiento del horno.
             </p>
             <div className="flex  flex-col gap-2  items-center w-full">
               <form onSubmit={handleSubmit} className="w-full">
@@ -212,7 +213,7 @@ const OvenAI = () => {
                     type="submit"
                     className="bg-primary"
                   >
-                    ON Oven AI
+                    Empezar
                   </Button>
                   <Button
                     type="button"
@@ -220,7 +221,7 @@ const OvenAI = () => {
                     padding={"px-2 py-2"}
                     className="bg-primary"
                   >
-                    Clear
+                    Limpiar
                   </Button>
                 </div>
               </form>
@@ -249,7 +250,7 @@ const OvenAI = () => {
                     onClick={() => setIsOpen(!isOpen)}
                     className="text-white/50 font-medium hover:underline"
                   >
-                    {isOpen ? "Read less" : "Read more"}
+                    {isOpen ? "Leer menos" : "Leer más"}
                   </button>
                 </>
               )}
@@ -257,6 +258,7 @@ const OvenAI = () => {
           </div>
         )}
       </div>
+      <Footer />
     </main>
   );
 };

@@ -1,33 +1,32 @@
 export const userInputs = [
-    {
-      label: "Oven Type",
-      placeholder: "Select the type of oven...",
-      options: ["Electric", "Stove", "Range"],
-    },
-    {
-      label: "Metal Type",
-      placeholder: "Select the metal to melt (e.g., Gold, Silver, Copper)...",
-      options: ["Gold", "Silver", "Copper", "Aluminum", "Iron", "Steel"], 
-    },
-    {
-      label: "Weight",
-      placeholder: "Enter the weight of the metal (in grams)...",
-    },
-    {
-      label: "Melting Temperature",
-      placeholder: "Enter the melting temperature (in °C)...",
-    },
-    {
-      label: "Power Level",
-      placeholder: "Enter the power level (in kW)...",
-    },
-    {
-      label: "Time",
-      placeholder: "Enter the melting time (in minutes)...",
-    },
-    {
-      label: "Crucible Material",
-      placeholder: "Enter the material of the crucible (e.g., graphite)...",
-    },
-  ];
-  
+  {
+    label: "Tipo de Horno",
+    placeholder: "Selecciona el tipo de horno...",
+    options: ["Horno de Inducción de Banco", "Horno de Inducción de Pie", "Horno de Inducción de Fundición"],
+  },
+  {
+    label: "Tipo de Metal",
+    placeholder: "Selecciona el metal a fundir (por ejemplo, Oro, Plata, Cobre)...",
+    options: ["Oro", "Plata", "Cobre", "Aluminio", "Hierro", "Acero"], 
+  },
+  {
+    label: "Peso",
+    placeholder: "Ingresa el peso del metal (en gramos)...",
+  },
+  {
+    label: "Temperatura de Fusión (en °C)",
+    placeholder: "Ingresa la temperatura de fusión (en °C)...",
+  },
+  {
+    label: "Nivel de Potencia ",
+    placeholder: "Ingresa el nivel de potencia (en kW)...",
+  },
+  {
+    label: "Tiempo de Fusión",
+    placeholder: "Ingresa el tiempo de fusión (en minutos o horas)...",
+  },
+  {
+    label: "Material del Crisol (En caso de existir)",
+    placeholder: "Ingresa el material del crisol (por ejemplo, grafito, piedra, ladrillo)...",
+  },
+];

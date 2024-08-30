@@ -78,7 +78,7 @@ export default function Features() {
               }px ${positions[i]?.y || 0}px, #1d1d1d, transparent 60%)`,
             }}
           />
-         {i === 0 && (
+          {i === 0 && (
             <>
               <Image
                 src={"/bg.svg"}
@@ -89,13 +89,13 @@ export default function Features() {
               />
               <div className="flex z-10">
                 <h1 className="md:text-3xl text-xl font-bold bg-gradient-to-l from-white to-[#1d1d1d] inline-block text-transparent bg-clip-text">
-                  Precise&nbsp;
+                  Control de&nbsp;
                 </h1>
                 <h1 className="md:text-3xl text-xl text-white font-bold">
-                  Temperature&nbsp;
+                  presicion&nbsp;
                 </h1>
                 <h1 className="md:text-3xl text-xl font-bold bg-gradient-to-r from-white to-[#1d1d1d] inline-block text-transparent bg-clip-text">
-                  Control.
+                  Electromagnético.
                 </h1>
               </div>
             </>
@@ -192,29 +192,8 @@ export default function Features() {
           )}
           {i === 2 && (
             <div className="text-center z-10 flex-col items-center justify-center">
-              <div className="flex absolute top-5 p-10">
-                <h1 className="font-bold bg-gradient-to-l from-white to-white/50 inline-block text-transparent bg-clip-text">
-                  Induction&nbsp;
-                </h1>
-                <motion.h1
-                  initial={{ opacity: 0.5, scale: 1 }}
-                  animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
-                  transition={{
-                    duration: 1,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                  className="text-white font-bold"
-                >
-                  Furnace&nbsp;
-                </motion.h1>
-                <h1 className="font-bold bg-gradient-to-r from-white to-white/50 inline-block text-transparent bg-clip-text">
-                  Description.
-                </h1>
-              </div>
-              <p className="font-bold relative text-lg text-white/50">
-                An{" "}
+              <p className="font-bold relative p-1 text-lg text-white/50">
+                Un{" "}
                 <motion.span
                   initial={{ opacity: 0.5, scale: 1 }}
                   animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
@@ -227,17 +206,17 @@ export default function Features() {
                   whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                   className="text-white"
                 >
-                  induction{" "}
+                  horno{" "}
                 </motion.span>
-                furnace provides rapid heating and uniform temperature
-                distribution.
+                de inducción proporciona un calentamiento rápido y una
+                distribución uniforme de la temperatura.
               </p>
             </div>
           )}
           {i === 3 && (
             <div className="absolute flex flex-col gap-4 z-10 top-5 p-5">
               <h1 className="font-bold text-3xl text-white">
-                Exothermic{" "}
+                Reacciones{" "}
                 <motion.span
                   initial={{ opacity: 0.5, scale: 1 }}
                   animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
@@ -249,20 +228,20 @@ export default function Features() {
                   }}
                   whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                 >
-                  Reactions
+                  exotérmicas
                 </motion.span>{" "}
-                for Metal Heating
+                para el calentamiento de metales
               </h1>
               <p className="font-bold text-lg text-white/50">
-                Harness exothermic reactions to generate heat and manage the
-                temperature efficiently.
+                Generarador de calor y analizador con IA de
+                la temperatura eficiente.
               </p>
             </div>
           )}
           {i === 4 && (
             <div className="flex flex-col gap-4 absolute bottom-5 p-5 z-10">
               <h1 className="font-bold text-3xl text-white">
-                Low{" "}
+              Concepto de{" "}
                 <motion.span
                   initial={{ opacity: 0.5, scale: 1 }}
                   animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
@@ -274,20 +253,19 @@ export default function Features() {
                   }}
                   whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                 >
-                  Emission
+                  Faraday
                 </motion.span>{" "}
-                Systems
+                en la quema de metales
               </h1>
               <p className="font-bold text-lg text-white/50">
-                Minimize environmental impact with efficient and low emission
-                systems.
+                Simulación inteligente para el calentamiento de metales.
               </p>
             </div>
           )}
           {i === 5 && (
             <div className="flex flex-col items-center justify-center p-5 z-10">
               <h1 className="font-bold text-3xl text-white">
-                Advanced{" "}
+                Eficiencia{" "}
                 <motion.span
                   initial={{ opacity: 0.5, scale: 1 }}
                   animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
@@ -299,19 +277,19 @@ export default function Features() {
                   }}
                   whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                 >
-                  Controls
+                  matematica
                 </motion.span>{" "}
-                for Efficiency
+                para el uso de hornos impulsados por la inducción electromagnética.
               </h1>
               <p className="font-bold text-lg text-white/50">
-                Enhance control with advanced systems for optimal performance.
+                
               </p>
             </div>
           )}
           {i === 6 && (
             <div className="absolute bottom-5 flex flex-col items-center justify-center p-5 z-10">
               <h1 className="font-bold text-3xl text-white">
-                State-of-the-Art{" "}
+                Tecnologias{" "}
                 <motion.span
                   initial={{ opacity: 0.5, scale: 1 }}
                   animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
@@ -323,12 +301,12 @@ export default function Features() {
                   }}
                   whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                 >
-                  Heating
+                  IA
                 </motion.span>{" "}
-                Technologies
+                mas conceptos de Faraday.
               </h1>
               <p className="font-bold text-lg text-white/50">
-                Discover cutting-edge heating technologies for enhanced efficiency.
+                
               </p>
             </div>
           )}

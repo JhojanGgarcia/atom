@@ -22,17 +22,17 @@ export default function Hero() {
             ></Image>
           </div>
           <h1 class="mt-4 text-center text-nowrap  text-3xl font-extrabold text-black dark:text-white md:text-5xl">
-            Faraday Energy
+            Energía de Faraday
           </h1>
           <p class="mt-2 text-center md:text-nowrap text-lg flex md:flex text-white/50 font-medium">
-            The Power at each electromagnetic induction.
+            La potencia en cada inducción electromagnética.
           </p>
         </div>
       </div>
 
       <div className="mt-48">
         <Link href="/pages/oven">
-          <Button padding={"px-4 py-3"}>Start Now</Button>
+          <Button padding={"px-4 py-3"}>Empieza Ahora</Button>
         </Link>
       </div>
     </main>
