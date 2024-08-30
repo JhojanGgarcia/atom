@@ -45,7 +45,13 @@ const OvenAI = () => {
     overflow: "hidden",
     display: "-webkit-box",
   };
-
+  const initialInputValues = userInputs.reduce((acc, item) => {
+    acc[item.label] = "";
+    return acc;
+  }, {});
+  const handleDataClear = () => {
+    setInputValues(initialInputValues); // Restablece a los valores iniciales
+  };
   const handleMouseMove = (e, index) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setPositions((prevPositions) => ({
@@ -143,70 +149,82 @@ const OvenAI = () => {
             <p className="mb-4 text-white/50 text-center">
               Provide the details below to initiate the metal processing.
             </p>
-            <form onSubmit={handleSubmit} className="w-full">
-              {userInputs.map((item, i) => (
-                <motion.div
-                  key={i}
-                  onMouseMove={(e) => handleMouseMove(e, i)}
-                  onMouseEnter={() => handleMouseEnter(i)}
-                  onMouseLeave={handleMouseLeave}
-                  className="relative w-full my-5"
-                >
-                  {item.options ? (
-                    <motion.select
-                      onChange={(e) => handleInputChange(e, item.label)}
-                      className="bg-[#121212] text-white/50 outline-none border border-white/5 w-full rounded-xl p-3.5 transition-opacity duration-500"
-                    >
-                      {item.options.map((option, index) => (
-                        <option
-                          key={index}
-                          value={option}
-                          className="bg-transparent text-white/50"
-                        >
-                          {option}
-                        </option>
-                      ))}
-                    </motion.select>
-                  ) : (
+            <div className="flex  flex-col gap-2  items-center w-full">
+              <form onSubmit={handleSubmit} className="w-full">
+                {userInputs.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    onMouseMove={(e) => handleMouseMove(e, i)}
+                    onMouseEnter={() => handleMouseEnter(i)}
+                    onMouseLeave={handleMouseLeave}
+                    className="relative w-full my-5"
+                  >
+                    {item.options ? (
+                      <motion.select
+                        onChange={(e) => handleInputChange(e, item.label)}
+                        className="bg-[#121212] text-white/50 outline-none border border-white/5 w-full rounded-xl p-3.5 transition-opacity duration-500"
+                      >
+                        {item.options.map((option, index) => (
+                          <option
+                            key={index}
+                            value={option}
+                            className="bg-transparent text-white/50"
+                          >
+                            {option}
+                          </option>
+                        ))}
+                      </motion.select>
+                    ) : (
+                      <motion.input
+                        type={item.type}
+                        value={inputValues[item.label]}
+                        placeholder={item.placeholder}
+                        onChange={(e) => handleInputChange(e, item.label)}
+                        className="bg-transparent text-white outline-none placeholder:text-white/40 relative flex items-center border border-white/5 z-10 w-full rounded-xl p-3.5 transition-opacity duration-500"
+                      />
+                    )}
                     <motion.input
-                      placeholder={item.placeholder}
-                      onChange={(e) => handleInputChange(e, item.label)}
-                      className="bg-transparent text-white outline-none placeholder:text-white/40 relative flex items-center border border-white/5 z-10 w-full rounded-xl p-3.5 transition-opacity duration-500"
+                      style={{
+                        border:
+                          hoveredIndex === i
+                            ? "1px solid rgba(255, 255, 255,0.5)"
+                            : "none",
+                        opacity: 1,
+                        WebkitMaskImage:
+                          hoveredIndex === i
+                            ? `radial-gradient(10% 100px at ${
+                                positions[i]?.x || 0
+                              }px ${
+                                positions[i]?.y || 0
+                              }px, black 45%, transparent)`
+                            : "none",
+                      }}
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-0 top-0 z-10 h-full w-full cursor-default rounded-xl bg-transparent opacity-0 transition-opacity duration-500"
                     />
-                  )}
-                  <motion.input
-                    style={{
-                      border:
-                        hoveredIndex === i
-                          ? "1px solid rgba(255, 255, 255,0.5)"
-                          : "none",
-                      opacity: 1,
-                      WebkitMaskImage:
-                        hoveredIndex === i
-                          ? `radial-gradient(10% 100px at ${
-                              positions[i]?.x || 0
-                            }px ${
-                              positions[i]?.y || 0
-                            }px, black 45%, transparent)`
-                          : "none",
-                    }}
-                    aria-hidden="true"
-                    className="pointer-events-none absolute left-0 top-0 z-10 h-full w-full cursor-default rounded-xl bg-transparent opacity-0 transition-opacity duration-500"
-                  />
-                </motion.div>
-              ))}
-              <div className="flex gap-2 justify-center w-full">
-                <Button
-                  onClick={() => setIsAIOpen(!isAIOpen)}
-                  disabled={completedTyping}
-                  padding={"px-2 py-2"}
-                  type="submit"
-                  className="bg-primary"
-                >
-                  Start Oven AI
-                </Button>
-              </div>
-            </form>
+                  </motion.div>
+                ))}
+                <div className="flex items-center justify-between">
+                  <Button
+                    onClick={() => setIsAIOpen(!isAIOpen)}
+                    disabled={completedTyping}
+                    padding={"px-2 py-2"}
+                    type="submit"
+                    className="bg-primary"
+                  >
+                    ON Oven AI
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleDataClear}
+                    padding={"px-2 py-2"}
+                    className="bg-primary"
+                  >
+                    Clear
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
 
@@ -226,12 +244,14 @@ const OvenAI = () => {
                 {displayResponse}
               </div>
               {showReadMoreButton && (
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="text-white/50 font-medium hover:underline"
-                >
-                  {isOpen ? "Read less" : "Read more"}
-                </button>
+                <>
+                  <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="text-white/50 font-medium hover:underline"
+                  >
+                    {isOpen ? "Read less" : "Read more"}
+                  </button>
+                </>
               )}
             </motion.div>
           </div>
