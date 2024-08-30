@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import React from "react";
 import "@/styles/Button.css";
-export default function Button({ children, icon, onClick, padding }) {
+export default function Button({ children, icon, onClick, padding, type }) {
   return (
     <motion.button
+      type={type}
       onClick={onClick}
       initial={{ "--x": "100%", scale: 1 }}
       animate={{ "--x": "-100%" }}
