@@ -7,6 +7,7 @@ import { userInputs } from "@/lib/userInput";
 import { motion } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Button from "@/components/ui/Button";
+import CardHelp from "@/components/ui/CardHelp";
 import "@/styles/mask.css";
 
 // Constantes para la API
@@ -39,6 +40,9 @@ const OvenAI = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState(false);
   const [isAIOpen, setIsAIOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
+
 
   const paragraphStyles = {
     WebkitLineClamp: 5,
@@ -46,13 +50,26 @@ const OvenAI = () => {
     overflow: "hidden",
     display: "-webkit-box",
   };
+
+
+
+
   const initialInputValues = userInputs.reduce((acc, item) => {
     acc[item.label] = "";
     return acc;
   }, {});
+
   const handleDataClear = () => {
-    setInputValues(initialInputValues); // Restablece a los valores iniciales
+    setInputValues(initialInputValues);
+    setResultText("");
+    setDisplayResponse("");
+    setCompletedTyping(false);
+    setIsOpen(false);
+    setIsAIOpen(false);
+    setIsProcessing(false);
+    setButtonClicked(false);
   };
+
   const handleMouseMove = (e, index) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setPositions((prevPositions) => ({
@@ -74,6 +91,13 @@ const OvenAI = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isProcessing || buttonClicked) {
+      return;
+    }
+    setButtonClicked(true);
+    setIsAIOpen(true);
+    setIsProcessing(true);
+
     toast.success("Metal processing initiated");
 
     try {
@@ -88,15 +112,17 @@ const OvenAI = () => {
         Asegúrate de que todos los cálculos estén relacionados exclusivamente con la operación y eficiencia de hornos de inducción, incluyendo, pero no limitado a, el consumo de energía, la frecuencia del campo magnético, y la tasa de calentamiento del material.`
       );
 
-      const rawText = await result.response.text(); // Added await to fix promise handling
+      const rawText = await result.response.text();
       const cleanedText = rawText
-        .replace(/[*#]/g, "") // Elimina '*' y '#'
-        .replace(/\s{2,}/g, " ") // Reemplaza múltiples espacios con un solo espacio
-        .trim(); // Elimina espacios en blanco al inicio y al final
+        .replace(/[*#]/g, "")
+        .replace(/\s{2,}/g, " ")
+        .trim();
       setResultText(cleanedText);
     } catch (error) {
       console.error("Error usando el horno:", error);
       toast.error("Hubo un problema al usar el horno.");
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -133,14 +159,15 @@ const OvenAI = () => {
   }, [ref.current?.scrollHeight, ref.current?.clientHeight]);
 
   return (
-    <main className="overflow-x-hidden flex flex-col gap-12 bg-[#121212]">
+    <main className="overflow-x-hidden flex flex-col  gap-12 bg-[#121212]">
+      
       <Header />
       <div className="absolute h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-5"></div>
 
-      <div className="flex flex-col md:flex-row min-h-screen  overflow-x-hidden items-center gap-32 justify-center">
+      <div className="flex flex-col md:flex-row min-h-screen overflow-x-hidden items-center gap-32 justify-center">
         <Toaster />
         <div className="inset-0 bg-opacity-50 gap-16 flex-col items-center p-1 justify-between">
-          <div className="relative border-2 border-white/5 overflow-hidden flex items-center justify-center flex-col top-20 p-6 rounded-xl shadow-lg backdrop-blur-sm">
+          <div className="relative border-2 border-white/5 overflow-hidden flex items-center justify-center flex-col top-10 p-6 rounded-xl shadow-lg backdrop-blur-sm">
             <span className="absolute bottom-0 mx-auto inset-x-1 h-[1.5px] dark:bg-gradient-to-r w-44 dark:from-fuchsia-400/0 dark:via-white/50" />
             <div className="absolute w-14 h-14 top-0 left-0 bg-white blur-3xl opacity-80" />
             <div className="absolute w-14 h-14 bottom-0 right-0 bg-white blur-3xl opacity-80" />
@@ -148,9 +175,10 @@ const OvenAI = () => {
               Horno de inducción.
             </h2>
             <p className="mb-4 max-w-lg text-white/50 text-center">
-              Proporcione los detalles a continuación para iniciar el procesamiento del horno.
+              Proporcione los detalles a continuación para iniciar el
+              procesamiento del horno.
             </p>
-            <div className="flex  flex-col gap-2  items-center w-full">
+            <div className="flex flex-col gap-2 items-center w-full">
               <form onSubmit={handleSubmit} className="w-full">
                 {userInputs.map((item, i) => (
                   <motion.div
@@ -207,10 +235,10 @@ const OvenAI = () => {
                 ))}
                 <div className="flex items-center justify-between">
                   <Button
-                    onClick={() => setIsAIOpen(!isAIOpen)}
-                    disabled={completedTyping}
+                    onClick={handleSubmit}
+                    disabled={isProcessing || buttonClicked}
                     padding={"px-2 py-2"}
-                    type="submit"
+                    type="button"
                     className="bg-primary"
                   >
                     Empezar
@@ -230,11 +258,17 @@ const OvenAI = () => {
         </div>
 
         {isAIOpen && (
-          <div className="flex min-h-10 p-1  md:h-0 items-center justify-center">
+          <motion.div
+            inicial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="flex min-h-10 p-1 md:h-0 items-center justify-center"
+          >
             <motion.div
-              className="w-full max-h-[60vh] p-6 h-auto overflow-auto max-w-xl bg-[#1a1a1a] rounded-lg border mask border-[#ffffff10] shadow-lg "
+              className="w-full max-h-[60vh] p-6 h-auto overflow-auto max-w-xl bg-[#1a1a1a] rounded-lg border mask border-[#ffffff10] shadow-lg"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
             >
               <div
@@ -255,7 +289,7 @@ const OvenAI = () => {
                 </>
               )}
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </div>
       <Footer />

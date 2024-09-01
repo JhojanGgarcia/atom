@@ -5,6 +5,8 @@ import Header from "./Header";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 export default function Hero() {
+
+  
   return (
     <main className="flex flex-col   items-center justify-center ">
       <Header />
