@@ -1,9 +1,5 @@
 export const userInputs = [
-  {
-    label: "Tipo de Horno",
-    placeholder: "Selecciona el tipo de horno...",
-    options: ["Horno de Inducción de Banco", "Horno de Inducción de Pie", "Horno de Inducción de Fundición"],
-  },
+
   {
     label: "Tipo de Metal",
     placeholder: "Selecciona el metal a fundir (por ejemplo, Oro, Plata, Cobre)...",
