@@ -2,13 +2,28 @@
 import Image from "next/image";
 import CardHelp from "../ui/CardHelp";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Button from "../ui/Button";
 export default function Header() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
-  const handleHelpOpen = () => {
+  const handleHelpOpen = (e) => {
+    e.stopPropagation();
     setIsHelpOpen(!isHelpOpen);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = () => {
+      if (isHelpOpen) {
+        setIsHelpOpen(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [isHelpOpen]);
   return (
     <>
       <header className="fixed backdrop-blur-3xl top-0 overflow-hidden z-50 w-full border-b border-white/5 h-16 flex items-center justify-center">
@@ -23,41 +38,15 @@ export default function Header() {
           </div>
           <div className="absolute right-0 p-4 gap-2 flex"></div>
         </div>
-        <div className="absolute right-5">
-          <button
+        <div className="absolute right-10">
+          <Button
+            padding={"px-2 py-1"}
             type="button"
-            onClick={() => setIsHelpOpen(!isHelpOpen)}
+            onClick={handleHelpOpen}
             className="cursor-pointer z-10 flex items-center justify-center bottom-5 right-5 backdrop-blur-sm  rounded-md "
           >
-            <svg
-              opacity={0.3}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              color="#fff"
-              fill="none"
-            >
-              <path
-                d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <path
-                d="M10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9C14 9.39815 13.8837 9.76913 13.6831 10.0808C13.0854 11.0097 12 11.8954 12 13V13.5"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-              <path
-                d="M11.992 17H12.001"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
+            Help
+          </Button>
         </div>
       </header>
       {isHelpOpen && <CardHelp onClick={handleHelpOpen} />}
