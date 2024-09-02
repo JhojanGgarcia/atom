@@ -98,7 +98,7 @@ const OvenAI = () => {
     setIsAIOpen(true);
     setIsProcessing(true);
 
-    toast.success("Metal processing initiated");
+    toast.success("Horno iniciado.");
 
     try {
       const chatSession = model.startChat({
