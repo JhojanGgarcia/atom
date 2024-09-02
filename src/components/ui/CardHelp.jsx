@@ -1,14 +1,14 @@
 
 export default function CardHelp({ children, onClick }) {
   return (
-    <div className="flex items-center justify-center overflow-hidden">
+    <div className="flex items-center relative justify-center overflow-hidden">
+        <div className="absolute w-14 h-14 z-10 top-0 left-0 bg-white blur-3xl opacity-80" />
+        <div className="absolute w-14 h-14 bottom-0 right-0 bg-white blur-3xl opacity-80" />
       <div
         onClick={onClick}
         className="fixed backdrop-blur-xl overflow-auto z-50 max-w-2xl top-20 border-2 border-white/5 bg-[#1a1a1a] text-white flex flex-col p-6 rounded-xl shadow-lg"
-        style={{ maxHeight: "80vh" }} // Limitamos la altura máxima del contenedor
+        style={{ maxHeight: "80vh" }}
       >
-        <div className="absolute w-14 h-14 top-0 left-0 bg-white blur-3xl opacity-80" />
-        <div className="absolute w-14 h-14 bottom-0 right-0 bg-white blur-3xl opacity-80" />
 
         <h2 className="text-2xl text-white/70 font-semibold mb-4">Introducción.</h2>
         <p className="mb-4 text-white/50">
