@@ -159,15 +159,15 @@ const OvenAI = () => {
   }, [ref.current?.scrollHeight, ref.current?.clientHeight]);
 
   return (
-    <main className="overflow-x-hidden flex flex-col  gap-12 bg-[#121212]">
+    <main className="overflow-x-hidden flex flex-col  gap-20 bg-[#121212]">
       
       <Header />
       <div className="absolute h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-5"></div>
 
-      <div className="flex flex-col md:flex-row min-h-screen overflow-x-hidden items-center gap-32 justify-center">
+      <div className="flex flex-col md:flex-row min-h-screen  items-center gap-32 p-1 justify-center">
         <Toaster />
         <div className="inset-0 bg-opacity-50 gap-16 flex-col items-center p-1 justify-between">
-          <div className="relative border-2 border-white/5 overflow-hidden flex items-center justify-center flex-col top-10 p-6 rounded-xl shadow-lg backdrop-blur-sm">
+          <div className="relative border-2  border-white/5 overflow-hidden flex items-center justify-center flex-col top-16 p-4 rounded-xl shadow-lg backdrop-blur-sm">
             <span className="absolute bottom-0 mx-auto inset-x-1 h-[1.5px] dark:bg-gradient-to-r w-44 dark:from-fuchsia-400/0 dark:via-white/50" />
             <div className="absolute w-14 h-14 top-0 left-0 bg-white blur-3xl opacity-80" />
             <div className="absolute w-14 h-14 bottom-0 right-0 bg-white blur-3xl opacity-80" />
