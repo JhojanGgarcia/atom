@@ -107,9 +107,9 @@ const OvenAI = () => {
       });
 
       const result = await chatSession.sendMessage(
-        `Usa los siguientes datos para realizar cálculos matemáticos específicos para un horno de inducción. Proporciona las fórmulas y los pasos detallados del proceso:
+        `Usa los siguientes datos para realizar cálculos matemáticos. Proporciona las fórmulas:
         ${JSON.stringify(inputValues)}
-        Asegúrate de que todos los cálculos estén relacionados exclusivamente con la operación y eficiencia de hornos de inducción, incluyendo, pero no limitado a, el consumo de energía, la frecuencia del campo magnético, y la tasa de calentamiento del material.`
+        Asegúrate de entregarme un resultado de la fundicion del material dado.`
       );
 
       const rawText = await result.response.text();
@@ -143,6 +143,7 @@ const OvenAI = () => {
         if (i > stringResponse.length) {
           clearInterval(intervalId);
           setCompletedTyping(true);
+          setButtonClicked(false);
         }
       }, 10);
 
