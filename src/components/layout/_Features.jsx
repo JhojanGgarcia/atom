@@ -96,13 +96,21 @@ export default function Features() {
           )}
           {i === 1 && (
             <div className="z-10 flex items-center justify-center">
-              <Image
-                className="z-10 animate-ping"
-                src={"/Atom.svg"}
-                width={50}
-                height={50}
-                alt={"Atom logo image"}
-              ></Image>
+              <svg
+                className="relative"
+                width="40"
+                height="40"
+                viewBox="0 0 512 512"
+              >
+                <g>
+                  <path
+                    d="M99 406H171.916C171.916 406 195.207 365.216 254.163 365.216C313.119 365.216 329.549 406 329.549 406L412 406L304.908 106L206.092 106L99 406ZM187.835 334.291L254.77 159.125L319.711 334.291C319.711 334.291 298.259 315.928 254.163 315.928C210.066 315.928 187.835 334.291 187.835 334.291Z"
+                    fill="#1212"
+                    stroke="white"
+                    strokeWidth="8"
+                  />
+                </g>
+              </svg>
 
               <h1 className="text-3xl font-bold bg-gradient-to-l from-white to-[#1d1d1d] inline-block text-transparent bg-clip-text">
                 atom
@@ -227,15 +235,15 @@ export default function Features() {
                 para el calentamiento de metales
               </h1>
               <p className="font-bold text-lg text-white/50">
-                Generador de calor y analizador con IA de
-                la temperatura eficiente.
+                Generador de calor y analizador con IA de la temperatura
+                eficiente.
               </p>
             </div>
           )}
           {i === 4 && (
             <div className="flex flex-col gap-4 absolute bottom-5 p-5 z-10">
               <h1 className="font-bold text-3xl text-white">
-              Concepto de{" "}
+                Concepto de{" "}
                 <motion.span
                   initial={{ opacity: 0.5, scale: 1 }}
                   animate={{ opacity: [0.5, 1], scale: [1, 1.05] }}
@@ -273,11 +281,10 @@ export default function Features() {
                 >
                   matematica
                 </motion.span>{" "}
-                para el uso de hornos impulsados por la inducción electromagnética.
+                para el uso de hornos impulsados por la inducción
+                electromagnética.
               </h1>
-              <p className="font-bold text-lg text-white/50">
-                
-              </p>
+              <p className="font-bold text-lg text-white/50"></p>
             </div>
           )}
           {i === 6 && (
@@ -299,9 +306,7 @@ export default function Features() {
                 </motion.span>{" "}
                 mas conceptos de Faraday.
               </h1>
-              <p className="font-bold text-lg text-white/50">
-                
-              </p>
+              <p className="font-bold text-lg text-white/50"></p>
             </div>
           )}
         </div>
